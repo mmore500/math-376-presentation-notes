@@ -1,0 +1,72 @@
+\documentclass[a4paper]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{amssymb}
+
+\title{F Distribution Lecture Prep}
+
+\begin{document}
+
+The pdf of the F distribution is given as 
+\[
+ g(f; \nu_{1}, \nu_{2}) =
+ \begin{cases} 
+      \hfill \frac{\Gamma(\frac{\nu_{1} + \nu_{2}}{2})}{\Gamma(\nu_{1}/2)\Gamma(\nu_{2}/2)} (\frac{\nu_{1}}{\nu_{2}})^{\nu_1/2} \cdot f^{\nu_{1}/2 - 1} (1 + \frac{\nu_1}{\nu_2}f)^{-(\nu_{1} + \nu_{2})/2}   \hfill & \text{ for $f > 0$} \\
+      \hfill 0 \hfill & \text{otherwise} \\
+  \end{cases}
+\]
+\textbf{Section 6 Theorem 14} (Part 1)\\
+We want to show
+\[
+\mathbb{F} = \frac{\mathbb{U}/\nu_{1}}{\mathbb{V}/\nu_{2}}
+\]
+where $\mathbb{U}$ and $\mathbb{V}$ are chi-squared distributed
+\[
+\mathbb{X}(x,k) = \frac{1}{2^{k/2}\Gamma(k/2)} x^{k/2-1} e^{-x/2}
+\]
+\begin{align*}
+\mathbb{F} 
+&= \frac{\mathbb{U}/\nu_{1}}{\mathbb{V}/\nu_{2}} \\
+&= \frac{\mathbb{U}/\nu_{1}}{v/\nu_{2}} \\
+&= \mathbb{U} \frac{\nu_{2}}{\nu_{1}v} \\
+\end{align*}
+We have
+\[
+\mathbb{U} \sim U(u; \nu_{1}) = \frac{1}{2^{\nu_{1}/2}\Gamma(\nu_{1}/2)} u^{\nu_{1}/2-1} e^{-u/2}
+\]
+Let 
+\[
+\mathbb{F} \sim F(f)
+\]
+With
+\begin{align*}
+\mathbb{F} \frac{\nu_{1}v}{\nu_{2}}
+&= \mathbb{U} \\
+\end{align*}
+by Theorem 1 in Section 7, it follows that
+\begin{align*}
+f(f; v, \nu_1, \nu_2) 
+&= U(\frac{f\nu_{1}v}{\nu_{2}}) \frac{\nu_{1}v}{\nu_{2}}\\
+&= \frac{1}{2^{\nu_{1}/2}\Gamma(\nu_{1}/2)} (\frac{f\nu_{1}v}{\nu_{2}})^{\nu_{1}/2-1} e^{-f\nu_{1}v/(2\nu_{2})} \frac{\nu_{1}v}{\nu_{2}}\\
+&= \frac{1}{2^{\nu_{1}/2}\Gamma(\nu_{1}/2)} (\frac{\nu_{1}v}{\nu_{2}})^{\nu_{1}/2-1}f^{\nu_{1}/2-1} e^{-f\nu_{1}v/(2\nu_{2})} \frac{\nu_{1}v}{\nu_{2}}\\
+&= \frac{1}{2^{\nu_{1}/2}\Gamma(\nu_{1}/2)(\frac{\nu_{2}}{\nu_{1}v})^{\nu_{1}/2-1}} f^{\nu_{1}/2-1} e^{-f\nu_{1}v/(2\nu_{2})} \frac{\nu_{1}v}{\nu_{2}}\\
+&= \frac{1}{\frac{2\nu_{2}}{\nu_{1}v}^{\nu_{1}/2}\Gamma(\nu_{1}/2)(\frac{\nu_{2}}{\nu_{1}v})^{-1}} f^{\nu_{1}/2-1} e^{-f\nu_{1}v/(2\nu_{2})} \frac{\nu_{1}v}{\nu_{2}}\\
+&= (\frac{\nu_{2}}{\nu_{1}v}) \frac{1}{\frac{2\nu_{2}}{\nu_{1}v}^{\nu_{1}/2}\Gamma(\nu_{1}/2)} f^{\nu_{1}/2-1} e^{-f\nu_{1}v/(2\nu_{2})} \frac{\nu_{1}v}{\nu_{2}}\\
+&= \frac{1}{\frac{2\nu_{2}}{\nu_{1}v}^{\nu_{1}/2}\Gamma(\nu_{1}/2)} f^{\nu_{1}/2-1} e^{-f\nu_{1}v/(2\nu_{2})} \\
+\end{align*}
+Thus, joint pdf of $\mathbb{F}$ and $\mathbb{V}$ can be given as the product of the two distributions.
+
+\begin{align*}
+g(f,v)
+&= v(v; \nu_{1}) f(f; v, \nu_{1}, \nu_{2}) \\
+&=  \frac{1}{2^{\nu_{2}/2}\Gamma(\nu_{2}/2)} v^{\nu_{2}/2-1} e^{-v/2} \frac{1}{\frac{2\nu_{2}}{\nu_{1}v}^{\nu_{1}/2}\Gamma(\nu_{1}/2)} f^{\nu_{1}/2-1} e^{-f\nu_{1}v/(2\nu_{2})} \\
+&= \frac{1}{2^{\nu_{1}/2 + \nu_{2}/2}\Gamma(\nu_{1}/2)\Gamma(\nu_{2}/2)} \frac{1}{\frac{\nu_{2}}{\nu_{1}v}^{\nu_{1}/2}} f^{\nu_{1}/2-1} e^{-f\nu_{1}v/(2\nu_{2})-v/2} v^{\nu_{2}/2-1}  \\
+&= \frac{1}{2^{\nu_{1}/2 + \nu_{2}/2}\Gamma(\nu_{1}/2)\Gamma(\nu_{2}/2)}{\frac{\nu_{1}v}{\nu_{2}}^{\nu_{1}/2}} f^{\nu_{1}/2-1} e^{-v/2(f\nu_{1}/\nu_{2} + 1)} v^{\nu_{2}/2-1}  \\
+&= \frac{\nu_{1}^{\nu_{1}/2} \nu_{2}^{-\nu_{1}/2}}{2^{\nu_{1}/2 + \nu_{2}/2}\Gamma(\nu_{1}/2)\Gamma(\nu_{2}/2)} f^{\nu_{1}/2-1} e^{-v/2(f\nu_{1}/\nu_{2} + 1)} v^{\nu_{2}/2-1+\nu_{1}/2} \\
+&= \frac{\frac{\nu_{1}}{\nu_{2}}^{\nu_{1}/2}}{2^{(\nu_{1} + \nu_{2})/2}\Gamma(\nu_{1}/2)\Gamma(\nu_{2}/2)} f^{\nu_{1}/2-1} e^{-v/2(f\nu_{1}/\nu_{2} + 1)} v^{\frac{\nu_{1} + \nu_{2}}{2}-1} \\
+\end{align*}
+\end{document}
